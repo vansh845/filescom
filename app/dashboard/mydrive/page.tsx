@@ -7,6 +7,8 @@ import Link from "next/link"
 import axios from "axios";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
+import { Input } from "@/components/ui/input"
+import UploadDialog from "@/components/filedialog"
 export default async function MyDrive() {
 
     const res = await axios.get("http://localhost:3000/api/getfiles");
@@ -18,10 +20,7 @@ export default async function MyDrive() {
 
             <div className="flex flex-col my-3">
                 <div>
-                    <Button className="space-x-1" variant="outline">
-                        <PlusIcon className="w-4 h-4" />
-                        <p>File</p>
-                    </Button>
+                    <UploadDialog />
                     <Button className="space-x-1" variant="outline">
                         <PlusIcon className="w-4 h-4" />
                         <p>Folder</p>
