@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+filescom-a8898a310669.json
+.env
+
 # next.js
 /.next/
 /out/
