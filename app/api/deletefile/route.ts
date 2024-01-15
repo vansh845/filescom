@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json("deleted");
     } catch (err) {
         console.error('Error deleting file:', err);
-        return NextResponse.json({ 'message': 'error' })
+        return new Response('error', { status: 500 })
     }
 
 

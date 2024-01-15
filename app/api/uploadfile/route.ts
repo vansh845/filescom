@@ -1,16 +1,17 @@
 import { Storage } from '@google-cloud/storage'
 import { File } from 'buffer';
 import { unlink, writeFile } from 'fs/promises';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { join } from 'path';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     const projectId = process.env.PROJECTID!;
     const bucketName = process.env.BUCKETID!;
 
     const storage = new Storage({
         projectId: projectId,
     });
+    const folderName = request.nextUrl.searchParams.get('foldername')!;
 
     const localFilePath = './public/localfile.png';
     const req = await request.formData();
@@ -25,10 +26,10 @@ export async function POST(request: Request) {
     await writeFile(path, buffer);
 
     const bucket = storage.bucket(bucketName);
-
+    const nme = folderName != 'mydrive' ? `${folderName}^/${name}` : name;
     try {
         await bucket.upload(`./public/tmp/${name}`, {
-            destination: name
+            destination: nme
         })
         const files = bucket.file(name);
         const nm = await files.getSignedUrl({

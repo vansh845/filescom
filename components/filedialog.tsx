@@ -13,7 +13,8 @@ import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation"
 
 export default function UploadDialog() {
-
+    const pathname = usePathname();
+    const last = pathname.split('/').at(-1);
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [loadingFolder, setLoadingFolder] = useState(false);
@@ -26,7 +27,7 @@ export default function UploadDialog() {
                 const formData = new FormData();
                 formData.append("name", fileInput.current.files[0].name);
                 formData.append("file", fileInput.current.files[0]);
-                await axios.post("/api/uploadfile", formData);
+                await axios.post(`/api/uploadfile?foldername=${last}`, formData);
                 setLoading(false);
                 toast.success('File uploaded');
                 document.getElementById("closer")?.click();
@@ -53,7 +54,7 @@ export default function UploadDialog() {
         setLoadingFolder(true);
         e.preventDefault();
         try {
-            await axios.get(`/api/createfolder?foldername=${folderName}`);
+            await axios.get(`/api/createfolder?foldername=${folderName}&clientfolder=${last}`);
             setLoadingFolder(false);
             toast.success('Folder created');
             document.getElementById("closerFolder")?.click();
