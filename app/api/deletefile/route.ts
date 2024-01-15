@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
     try {
 
-        const filename = request.nextUrl.searchParams.get('keyword')!;
+        const filename = request.nextUrl.searchParams.get('filename')!;
         const file = await storage.bucket(bucketName).file(filename).delete();
         return NextResponse.json("deleted");
     } catch (err) {

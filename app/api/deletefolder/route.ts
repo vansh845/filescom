@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
         });
         return NextResponse.json("deleted");
     } catch (error) {
-        return NextResponse.json({ 'message': error });
+        return new Response('error', { status: 500 })
     }
 
 }

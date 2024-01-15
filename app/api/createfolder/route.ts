@@ -13,8 +13,9 @@ export async function GET(request: NextRequest) {
         const folderName = request.nextUrl.searchParams.get('foldername')!;
         const bucket = storage.bucket(bucketName);
         const folder = await bucket.upload('public/localfile.png', {
-            destination: 'folder/remote.png'
+            destination: `${folderName.concat('^')}/localfile.png`,
         })
+
         return NextResponse.json("created");
     } catch (error) {
         return NextResponse.json({ 'message': error });

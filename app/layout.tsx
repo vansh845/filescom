@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth';
 import { GetServerSideProps } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { Toaster } from '@/components/ui/sonner';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,10 +25,11 @@ export default async function RootLayout({
   const session = await getServerSession();
 
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <body className={inter.className}>
         <Sessionprovider session={session}>
           {children}
+          <Toaster />
         </Sessionprovider>
       </body>
     </html>
