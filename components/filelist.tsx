@@ -31,7 +31,7 @@ export default function FileList({ files }: { files: resposnetype }) {
                 if (file.name.split('/').at(-2) === foldername + '^') {
                     return
                 }
-                if (file.name.split('/').at(-2)?.includes('^') && file.name.split('/').at(-1) === 'localfile.png') {
+                if (file.name.split('/').at(-2)?.includes('^') && !file.name.split('/').at(-3)?.includes('^') && file.name.split('/').at(-1) === 'localfile.png') {
                     return (
                         <div key={file.name}>
                             <div className={`flex justify-between w-full ${cn(buttonVariants({ variant: 'secondary' }))}`}>
@@ -48,7 +48,7 @@ export default function FileList({ files }: { files: resposnetype }) {
                 }
             })}
             {files.map((file) => (
-                foldername === 'mydrive' && !file.name.includes('^') ? (<div key={file.name}>
+                foldername === 'mydrive' && !file.name.includes('^') && file.name.split('/').at(-1) !== 'localfile.png' ? (<div key={file.name}>
                     <div className={`flex justify-between w-full ${cn(buttonVariants({ variant: 'secondary' }))}`}>
                         <a target="blank" href={file.url} className="flex flex-col">
                             {/* <div className="bg-slate-100 hover:bg-slate-50 text-black justify-between"> */}
