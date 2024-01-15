@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
     try {
         await bucket.upload(`./public/tmp/${name}`, {
-            destination: name,
+            destination: name
         })
         const files = bucket.file(name);
         const nm = await files.getSignedUrl({
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     }
     catch (err) {
         console.error('Error uploading file:', err);
-        return Response.json({ 'message': 'error' })
+        return Response.json({ 'message': err })
     }
 
 

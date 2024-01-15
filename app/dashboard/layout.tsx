@@ -10,6 +10,8 @@ export default function DashboardLayout({
     const pathname = usePathname();
     const last = pathname.split("/").at(-1);
     const secondLast = pathname.split("/").at(-2);
+    const thirdLast = pathname.split("/").at(-3);
+    const fourthLast = pathname.split("/").at(-4);
     console.log(pathname);
 
     return (
@@ -18,7 +20,12 @@ export default function DashboardLayout({
             <Sidebar />
             <div className="flex-1 overflow-auto p-4">
 
-                <h2 className="font-medium text-md">{secondLast + ' > ' + last}</h2>
+                <div className="flex">
+                    <p>{fourthLast ? `${fourthLast}>` : ''}</p>
+                    <p>{thirdLast ? `${thirdLast}>` : ''}</p>
+                    <p>{secondLast ? `${secondLast}>` : ''}</p>
+                    <p>{last}</p>
+                </div>
                 {children}
             </div>
         </main>

@@ -10,9 +10,10 @@ import { toast } from 'sonner'
 import { cn } from "@/lib/utils"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useRouter } from "next/navigation"
-// import { useMutation } from "@tanstack/react-query"
+import { usePathname } from "next/navigation"
 
 export default function UploadDialog() {
+
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [loadingFolder, setLoadingFolder] = useState(false);
